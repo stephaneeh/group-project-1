@@ -2,7 +2,6 @@
 
 ## Description
 
-
 ## Installation
 
 N/A
@@ -18,8 +17,4 @@ N/A
 
 N/A
 
-
 ## Link to deployed application
-
-
-
