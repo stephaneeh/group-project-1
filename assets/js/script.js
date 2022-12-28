@@ -41,11 +41,12 @@ fetch('https://v6.exchangerate-api.com/v6/YOUR-API-KEY/codes')
       .then(function (data) {
         console.log(data);
         var result = document.createElement('p');
-        result.textContent = '1 '+ sourceCountryCode +' = ' + data.conversion_rate + " " + destinationCountryCode;
+        result.textContent = '1 '+ sourceCountryCode +' = ' + data.conversion_rate + " " +destinationCountryCode;
         resultsContainer.append(result);
       });
       
   }
 
-  
   submitBtn.addEventListener('click', handleButtonClick);
+
+
