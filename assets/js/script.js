@@ -1,3 +1,7 @@
+// Mauxi's API Key: 1cd51d26035378cfa296c442
+// URL example https://v6.exchangerate-api.com/v6/1cd51d26035378cfa296c442/latest/USD
+// var mauxiKey = 1cd51d26035378cfa296c442;
+
 var sourceCountry = document.querySelector('#source-country');
 var destinationCountry = document.querySelector('#destination-country');
 var submitBtn = document.querySelector('#submit-btn');
@@ -44,4 +48,5 @@ fetch('https://v6.exchangerate-api.com/v6/YOUR-API-KEY/codes')
   }
 
   submitBtn.addEventListener('click', handleButtonClick);
+
 
