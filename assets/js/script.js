@@ -1,14 +1,13 @@
-// Mauxi's API Key: 1cd51d26035378cfa296c442
-// URL example https://v6.exchangerate-api.com/v6/1cd51d26035378cfa296c442/latest/USD
-// var mauxiKey = 1cd51d26035378cfa296c442;
+var mauxiKey = '1cd51d26035378cfa296c442';
+// ---- TODO: add your key in a var :) ---- //
 
 var sourceCountry = document.querySelector('#source-country');
 var destinationCountry = document.querySelector('#destination-country');
 var submitBtn = document.querySelector('#submit-btn');
 var resultsContainer = document.querySelector('#results-container');
 
-// put in your API KEY
-fetch('https://v6.exchangerate-api.com/v6/YOUR-API-KEY/codes')
+// TODO: add an API KEY to test your code
+fetch('https://v6.exchangerate-api.com/v6/'+ mauxiKey +'/codes')
   .then(function (response) {
     return response.json();
   })
@@ -34,19 +33,18 @@ fetch('https://v6.exchangerate-api.com/v6/YOUR-API-KEY/codes')
     var sourceCountryCode = sourceCountry.value;
     var destinationCountryCode = destinationCountry.value;
     //put in your API KEY
-    fetch('https://v6.exchangerate-api.com/v6/YOUR-API-KEY/pair/' + sourceCountryCode +'/'+ destinationCountryCode +'')
+    fetch('https://v6.exchangerate-api.com/v6/'+ mauxiKey +'/pair/' + sourceCountryCode +'/'+ destinationCountryCode +'')
       .then(function (response) {
         return response.json();
       })
       .then(function (data) {
         console.log(data);
         var result = document.createElement('p');
-        result.textContent = '1 '+ sourceCountryCode +' = ' + data.conversion_rate + " " +destinationCountryCode;
+        result.textContent = '1 '+ sourceCountryCode +' = ' + data.conversion_rate + " " + destinationCountryCode;
         resultsContainer.append(result);
       });
       
   }
 
+
   submitBtn.addEventListener('click', handleButtonClick);
-
-
