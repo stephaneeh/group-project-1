@@ -3,8 +3,11 @@ var mauxiKey = '1cd51d26035378cfa296c442';
 var YanfangKey = '913440a5293f2012406cc25c';
 var shKey = '9467838ba1d2eed66723ca50';
 
-var baseCurrency = '';
-var targetCurrency = '';
+// marketAUX details
+var marketKey = 'PBOJWpVm2AVpXBog3MjMLnkCiqqiw3XMXKxXcv3h';
+
+var sourceCountryCode = '';
+var destinationCountryCode = '';
 var targetExchange = '';
 
 var sourceCountry = document.querySelector('#source-country');
@@ -13,6 +16,9 @@ var submitBtn = document.querySelector('#submit-btn');
 var resultsContainer = document.querySelector('#results-container');
 var inputField = document.querySelector('#input-field');
 var newsContainer = document.querySelector('#news-container');
+var articleContainer = document.querySelector('#article-container');
+var modal = document.getElementById("myModal");
+var span = document.getElementsByClassName("close")[0];
 
 var options = [
     {country: "Australia", code: "au", currency: "AUD", exchange: "ASX" },
@@ -32,6 +38,7 @@ var options = [
     {country: "United States", code: "us", currency: "USD", exchange: "NYSE" },
 ];
 
+//lists out the options available to choose from in the drop down lists
 var getList = function () {
     for (var i = 0; i < options.length; i++) {
         var sourceCountryCode = document.createElement('option');
@@ -44,7 +51,6 @@ var getList = function () {
         destinationCountryCode.setAttribute('value', options[i].currency + '-' + options[i].exchange);
         destinationCountry.append(destinationCountryCode);
     };
-    
 };
 
 function handleButtonClick(event){
@@ -53,9 +59,16 @@ function handleButtonClick(event){
     destinationCountryCode = destinationCountry.value.split('-')[0];
     targetExchange = destinationCountry.value.split('-')[1];
 
-    console.log(targetExchange);
+    //modal to appear if input field is empy
+    if (!inputField.value) {
+      modal.style.display = "block";
+      //on select the close button
+      span.onclick = function() {
+        modal.style.display = "none";
+      }
+    } else {
 
-    //put in your API KEY
+    //API to fetch results for exchange rates
     fetch('https://v6.exchangerate-api.com/v6/'+ shKey +'/pair/' + sourceCountryCode +'/'+ destinationCountryCode +'')
       .then(function (response) {
         return response.json();
@@ -74,29 +87,25 @@ function handleButtonClick(event){
         resultsContainer.append(DollarResult);
 
         localStorage.setItem(sourceCountryCode +' to '+ destinationCountryCode, data.conversion_rate);
-      });
+      })
+
+      
+      var marketNewsURL = 'https://api.marketaux.com/v1/news/all?exchanges=' + targetExchange + '&filter_entities=true&limit=3&published_after=2022-12-29T02:24&api_token=' + marketKey;
 
 
-      // marketAUX details
-    var marketKey = 'PBOJWpVm2AVpXBog3MjMLnkCiqqiw3XMXKxXcv3h';
-    var marketNewsURL = 'https://api.marketaux.com/v1/news/all?exchanges=' + targetExchange + '&filter_entities=true&limit=3&published_after=2022-12-29T02:24&api_token=' + marketKey;
+    //API to fetch results for exchange rates
+    fetch(marketNewsURL)
+    .then(function (newsResponse) {
+      if (newsResponse.ok) {
+        newsResponse.json().then(function(data) {
 
-    console.log(marketNewsURL);
+          console.log(marketNewsURL);
+          articleContainer.innerHTML= '';
 
-      // This is the code for the news results, to be based on destination, should eventually fall under the button function
-      fetch(marketNewsURL)
-      .then(function (newsResponse) {
-        if (newsResponse.ok) {
-          newsResponse.json().then(function(data) {
-            console.log(data)
+          var articleList = document.createElement('ul');
+          articleContainer.appendChild(articleList);
 
-            var articleContainer = document.createElement('article');
-            newsContainer.appendChild(articleContainer);
-
-            var articleList = document.createElement('ul');
-            articleContainer.appendChild(articleList);
-
-            for (var i = 0; i < data.data.length; i++) {
+          for (var i = 0; i < data.data.length; i++) {
             var articleTitle = document.createElement('li');
             articleTitle.textContent = data.data[i].title;
             articleList.appendChild(articleTitle);
@@ -109,24 +118,14 @@ function handleButtonClick(event){
             articleURL.textContent = "Read more";
             articleURL.setAttribute("href", data.data[i].url);
             articleTitle.appendChild(articleURL);
-            }
-          })
-        }
-      });
+          }
+        })
+      }
+     })
+    }
 };
-
-
-
-
 
 submitBtn.addEventListener('click', handleButtonClick);
 
+//Loads the available options in the drop down lists
 getList();
-
-
-
-
-
-
-
-
