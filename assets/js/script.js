@@ -63,7 +63,7 @@ fetch('https://v6.exchangerate-api.com/v6/'+ shKey +'/codes')
 
   }
 
-      // This is the code for the news results, based on destination
+      // This is the code for the news results, to be based on destination, should eventually fall under the button function
       fetch(marketNewsURL)
       .then(function (newsResponse) {
         if (newsResponse.ok) {
