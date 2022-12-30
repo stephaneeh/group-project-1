@@ -62,6 +62,7 @@ function handleButtonClick(event){
       })
       .then(function (data) {
         console.log(data);
+        resultsContainer.innerHTML= '';
         var inputValueResult = document.createElement('p');
         var inputValue =inputField.value;
         var inputResult =inputValue*data.conversion_rate;
@@ -69,7 +70,6 @@ function handleButtonClick(event){
         resultsContainer.append(inputValueResult);
        
         var DollarResult = document.createElement('p');
-        DollarResult.innerHTML= '';
         DollarResult.textContent = '1 '+ sourceCountryCode +' = ' + data.conversion_rate + " " + destinationCountryCode;
         resultsContainer.append(DollarResult);
       });
