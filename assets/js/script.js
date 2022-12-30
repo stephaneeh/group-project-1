@@ -72,6 +72,8 @@ function handleButtonClick(event){
         var DollarResult = document.createElement('p');
         DollarResult.textContent = '1 '+ sourceCountryCode +' = ' + data.conversion_rate + " " + destinationCountryCode;
         resultsContainer.append(DollarResult);
+
+        localStorage.setItem(sourceCountryCode +' to '+ destinationCountryCode, data.conversion_rate);
       });
 
 
