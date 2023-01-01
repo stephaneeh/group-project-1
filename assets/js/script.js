@@ -44,7 +44,13 @@ var options = [
 
 //lists out the options available to choose from in the drop down lists
 var getList = function () {
-    for (var i = 0; i < options.length; i++) {
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.parallax');
+    var instances = M.Parallax.init(elems, options);
+  });  
+  
+  for (var i = 0; i < options.length; i++) {
         var sourceCountryCode = document.createElement('option');
         sourceCountryCode.textContent = options[i].country + " - " + options[i].currency;
         sourceCountryCode.setAttribute('value', options[i].currency + '-' + options[i].code);

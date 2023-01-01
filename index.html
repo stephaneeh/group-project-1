@@ -14,18 +14,23 @@
     
 </head>
 
+<header>
+  <h1 class = "card-panel light-blue darken-2 white-text z-depth-3 center-align">Currency Exchanger</h1>
+  <h2 id="date"></h2> <!-- TODO: I haven't touched the jQuery date -->
+</header>
+
+<div class="hero"></div>
 
 <body>
   <!--Currency excange 'card'-->
     <!--Materialize sets a 'container' to use 70% of the available space-->
-    <div class="container">
-    <header>
-        <h1 class = "card-panel light-blue darken-2 white-text z-depth-3 center-align">Currency Exchanger</h1>
-        <h2 id="date"></h2> <!-- TODO: I haven't touched the jQuery date -->
-    </header>
+    <!-- TODO: PLAY WITH THIS SOME MORE TO WORK OUT WHAT ITS DOING<div class="parallax-container">
+      <div class="parallax"><img src="./assets/img/download.jpeg"></div>
+    </div> -->
     
+    <div class="container">
+
     <main>
-        
     <div class = "center z-depth-5">
        <section class = "container row">
 
@@ -33,11 +38,8 @@
         <div id="dropdown-currencies" class="row col s12">
 
           <br><br><br>
-             
             <select id="source-country" class = "browser-default col s6"> </select>
-            
             <i class="medium material-icons arrow">arrow_forward</i>
-            
             <select id="destination-country" class = "browser-default col s6"> </select>
             
           </div>    
@@ -57,7 +59,6 @@
         </form>
       </div>
     
-       
       <section class="container"> <!--Added this section to keep the convert button and rate exchange together-->
        
             <div id="results-container"></div> 
@@ -82,20 +83,16 @@
     <div class = "row">
       <!--added funny background colours to make it easier to track-->
       <!--changed h1s to h3s for aesthetic-->
-        <section id="history-container" class ="card-panel #ff4081 pink accent-2 col s4 z-depth-1">
-            <h3 class = "center-align">History</h3>
+        <section id="history-container" class ="card-panel col s4 z-depth-1">
+            <h3 class = "#ff4081 pink accent-2 center-align">History</h3>
             <ul id="history-list">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
+
             </ul>
             <!--TODO:remove later -->
         </section>
         
-        <section id="news-container" class="card-panel #eeff41 lime accent-2 col s8 z-depth-1">
-            <h3 class="center-align">News</h3>
+        <section id="news-container" class="card-panel col s8 z-depth-1">
+            <h3 class="#eeff41 lime accent-2 center-align">News</h3>
             <article id="article-container">
 
             </article>
