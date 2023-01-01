@@ -2,3 +2,37 @@
     display: flex;
     align-items: center;
 }
+
+
+select {
+    margin-top: 75px;
+    height: 60px;
+    
+}
+
+ .arrow {
+    margin-top: 80px;
+ }
+
+
+ @media screen and (max-width: 768px) {
+    #history-container,
+    #news-container {
+        float: none;
+        width: 100%;
+    }
+
+    #dropdown-currencies{
+        flex-direction: column;
+    
+        
+    }
+
+    .row .col.s6 {
+        width: 100%;
+        margin-left: 0px;
+        left: auto;
+        right: auto;
+    }
+
+ }
