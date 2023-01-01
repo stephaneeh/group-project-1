@@ -68,6 +68,7 @@ function handleButtonClick(event){
     } else {
 
     //API to fetch results for exchange rates
+
     var exchangeURL = 'https://v6.exchangerate-api.com/v6/'+ shKey +'/pair/' + sourceCountryCode +'/'+ destinationCountryCode +'';
     fetch(exchangeURL)
     .then(function (response) {
@@ -91,7 +92,6 @@ function handleButtonClick(event){
       
     });
       
-
       
       var marketNewsURL = 'https://api.marketaux.com/v1/news/all?exchanges=' + targetExchange + '&filter_entities=true&limit=3&published_after=2022-12-29T02:24&api_token=' + marketKey;
 
