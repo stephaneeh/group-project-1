@@ -14,11 +14,15 @@ var sourceCountry = document.querySelector('#source-country');
 var destinationCountry = document.querySelector('#destination-country');
 var submitBtn = document.querySelector('#submit-btn');
 var resultsContainer = document.querySelector('#results-container');
+var historyContainer = document.querySelector('#history-container');
+var historyList = document.querySelector('#history-list');
 var inputField = document.querySelector('#input-field');
 var newsContainer = document.querySelector('#news-container');
 var articleContainer = document.querySelector('#article-container');
 var modal = document.getElementById("myModal");
 var span = document.getElementsByClassName("close")[0];
+
+var historyArray = JSON.parse(localStorage.getItem("historyArray")) || [];
 
 var options = [
     {country: "Australia", code: "au", currency: "AUD", exchange: "ASX" },
@@ -53,8 +57,22 @@ var getList = function () {
     };
 };
 
+var loadHistory = function () {
+  historyList.innerHTML= '';  
+  
+  for (var i = 0; i < historyArray.length; i++) {
+        var liEl = document.createElement('li');
+        liEl.textContent = historyArray[i].conversion + " - " + historyArray[i].rate;
+
+        historyList.appendChild(liEl);
+    }
+  };
+
+
 function handleButtonClick(event){
     //get currency of selected countries
+    loadHistory();
+
     sourceCountryCode = sourceCountry.value.split('-')[0];
     destinationCountryCode = destinationCountry.value.split('-')[0];
     targetExchange = destinationCountry.value.split('-')[1];
@@ -86,10 +104,25 @@ function handleButtonClick(event){
         DollarResult.textContent = '1 '+ sourceCountryCode +' = ' + data.conversion_rate + " " + destinationCountryCode;
         resultsContainer.append(DollarResult);
 
-        localStorage.setItem(sourceCountryCode +' to '+ destinationCountryCode, data.conversion_rate);
-      })
-
+        // localStorage.setItem(sourceCountryCode +' to '+ destinationCountryCode, data.conversion_rate);
+        var history = {
+          conversion: sourceCountryCode +' to '+ destinationCountryCode,
+          rate: data.conversion_rate,
+        };
+          
+        if (historyArray.length < 5) {
+          historyArray.push(history);
+        } else {
+      historyArray.push(history);
+      historyArray.shift();
+        }
+      localStorage.setItem("historyArray", JSON.stringify(historyArray));
       
+      })
+    };
+
+
+
       var marketNewsURL = 'https://api.marketaux.com/v1/news/all?exchanges=' + targetExchange + '&filter_entities=true&limit=3&published_after=2022-12-29T02:24&api_token=' + marketKey;
 
 
@@ -122,10 +155,10 @@ function handleButtonClick(event){
         })
       }
      })
-    }
-};
+    };
 
 submitBtn.addEventListener('click', handleButtonClick);
 
 //Loads the available options in the drop down lists
 getList();
+loadHistory();
