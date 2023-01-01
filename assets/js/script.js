@@ -1,3 +1,4 @@
+//exchange rates keys
 var mauxiKey = '1cd51d26035378cfa296c442';
 var YanfangKey = '913440a5293f2012406cc25c';
 var shKey = '9467838ba1d2eed66723ca50';
@@ -68,30 +69,26 @@ function handleButtonClick(event){
     } else {
 
     //API to fetch results for exchange rates
+    fetch('https://v6.exchangerate-api.com/v6/'+ shKey +'/pair/' + sourceCountryCode +'/'+ destinationCountryCode +'')
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data);
+        resultsContainer.innerHTML= '';
+        var inputValueResult = document.createElement('p');
+        var inputValue =inputField.value;
+        var inputResult =inputValue*data.conversion_rate;
+        inputValueResult.textContent = inputValue + ' ' + sourceCountryCode +' = ' + inputResult + " " + destinationCountryCode;
+        resultsContainer.append(inputValueResult);
+       
+        var DollarResult = document.createElement('p');
+        DollarResult.textContent = '1 '+ sourceCountryCode +' = ' + data.conversion_rate + " " + destinationCountryCode;
+        resultsContainer.append(DollarResult);
 
-    var exchangeURL = 'https://v6.exchangerate-api.com/v6/'+ shKey +'/pair/' + sourceCountryCode +'/'+ destinationCountryCode +'';
-    fetch(exchangeURL)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      console.log(data);
-      resultsContainer.innerHTML= '';
-      var inputValueResult = document.createElement('p');
-      var inputValue =inputField.value;
-      var inputResult =inputValue*data.conversion_rate;
-      var historyKey = sourceCountryCode +' to '+ destinationCountryCode;
-      inputValueResult.textContent = inputValue + ' ' + sourceCountryCode +' = ' + inputResult + " " + destinationCountryCode;
-      resultsContainer.append(inputValueResult);
-     
-      var DollarResult = document.createElement('p');
-      DollarResult.textContent = '1 '+ sourceCountryCode +' = ' + data.conversion_rate + " " + destinationCountryCode;
-      resultsContainer.append(DollarResult);
+        localStorage.setItem(sourceCountryCode +' to '+ destinationCountryCode, data.conversion_rate);
+      })
 
-      localStorage.setItem(historyKey, data.conversion_rate);
-      
-    });
-      
       
       var marketNewsURL = 'https://api.marketaux.com/v1/news/all?exchanges=' + targetExchange + '&filter_entities=true&limit=3&published_after=2022-12-29T02:24&api_token=' + marketKey;
 
