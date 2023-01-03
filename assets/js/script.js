@@ -167,6 +167,7 @@ function handleButtonClick(event){
             var articleURL = document.createElement('a');
             articleURL.textContent = 'Read more...';
             articleURL.setAttribute('href', data.data[i].url);
+            articleURL.setAttribute('target', '_blank');
             articleTitle.appendChild(articleURL);
           }
         })
