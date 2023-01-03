@@ -49,6 +49,10 @@ $(document).ready(function(){
   $('.parallax').parallax();
 });
 
+$(document).ready(function(){
+  $('select').formSelect();
+});
+
 var getList = function () { 
   //load options into dropdown list
   for (var i = 0; i < options.length; i++) {
@@ -145,28 +149,29 @@ function handleButtonClick(event){
           console.log(data);
           articleContainer.innerHTML= '';
 
-          var articleList = document.createElement('ul');
-          articleContainer.appendChild(articleList);
+          // var articleList = document.createElement('ul');
+          // articleContainer.appendChild(articleList);
 
           for (var i = 0; i < data.data.length; i++) {
-            var articleTitle = document.createElement('li');
+            var articleTitle = document.createElement('h5');
+            articleTitle.setAttribute('id', 'news-style');
             articleTitle.textContent = data.data[i].title;
-            articleList.appendChild(articleTitle);
+            articleTitle.style = 'font-weight: bold';
+            articleContainer.append(articleTitle);
 
             var articleSnippet = document.createElement('p');
             articleSnippet.textContent = data.data[i].snippet;
+            articleSnippet.style = 'font-weight: normal';
             articleTitle.appendChild(articleSnippet);
 
             var articleURL = document.createElement('a');
-            articleURL.textContent = "Read more";
-            articleURL.setAttribute("href", data.data[i].url);
+            articleURL.textContent = 'Read more...';
+            articleURL.setAttribute('href', data.data[i].url);
             articleTitle.appendChild(articleURL);
           }
         })
       }
      })
-     //get currency of selected countries
-
     };
 
 submitBtn.addEventListener('click', handleButtonClick);

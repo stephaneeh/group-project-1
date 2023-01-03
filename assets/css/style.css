@@ -3,6 +3,16 @@ h2 {
     margin-top: 10px;
 }
 
+h5 {
+    font-size: 1rem;
+}
+
+a {
+    display: flex;
+    justify-content: flex-end;
+    font-style: normal;
+}
+
 .modal {
     display: none;
     position: fixed;
@@ -38,8 +48,13 @@ h2 {
     cursor: pointer;
 }
 header, 
-section {
+section,
+footer {
     padding: 10px 0;
+}
+
+li {
+    margin-left: 10px;
 }
 
 .row {
@@ -54,6 +69,10 @@ section {
     padding-bottom: 30px;
 }
 
+#second-container {
+    padding: 0 30px;
+    padding-bottom: 30px;
+}
 
 #dropdown-currencies{
     display: flex;
@@ -63,12 +82,9 @@ section {
 select {
     /* margin-top: 75px; */
     height: 60px;
-    
+    background-color: RGBA(135, 206, 250, 0.2);
 }
 
- .arrow {
-    /* margin-top: 80px; */
- }
 
 
  @media screen and (max-width: 768px) {
@@ -80,10 +96,13 @@ select {
 
     #dropdown-currencies{
         flex-direction: column;
-    
-        
     }
-
+    .arrow {
+        transform: rotate(90deg);
+     }
+    li {
+        text-align: center;
+    }
     .row .col.s6 {
         width: 100%;
         margin-left: 0px;
