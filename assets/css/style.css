@@ -1,20 +1,7 @@
-body {
-    background-image: url(./assets/img/download.jpeg);
+h1,
+h2 {
+    margin-top: 10px;
 }
-
-.hero {
-    /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("photographer.jpg");
-      
-        /* Set a specific height */
-        height: 50%;
-      
-        /* Position and center the image to scale nicely on all screens */
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        position: relative;
-      }
 
 .modal {
     display: none;
@@ -50,6 +37,22 @@ body {
     text-decoration: none;
     cursor: pointer;
 }
+header, 
+section {
+    padding: 10px 0;
+}
+
+.row {
+    margin-bottom: 0px;
+}
+
+.parallax-container {
+    height: 150px;
+  }
+
+.convert-container {
+    padding-bottom: 30px;
+}
 
 
 #dropdown-currencies{
@@ -57,15 +60,14 @@ body {
     align-items: center;
 }
 
-
 select {
-    margin-top: 75px;
+    /* margin-top: 75px; */
     height: 60px;
     
 }
 
  .arrow {
-    margin-top: 80px;
+    /* margin-top: 80px; */
  }
 
 

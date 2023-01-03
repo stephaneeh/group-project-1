@@ -10,15 +10,17 @@ var sourceCountryCode = '';
 var destinationCountryCode = '';
 var targetExchange = '';
 
+var dateContainer = document.querySelector('#date-container');
+var resultsContainer = document.querySelector('#results-container');
 var sourceCountry = document.querySelector('#source-country');
 var destinationCountry = document.querySelector('#destination-country');
+var inputField = document.querySelector('#input-field');
 var submitBtn = document.querySelector('#submit-btn');
-var resultsContainer = document.querySelector('#results-container');
 var historyContainer = document.querySelector('#history-container');
 var historyList = document.querySelector('#history-list');
-var inputField = document.querySelector('#input-field');
 var newsContainer = document.querySelector('#news-container');
 var articleContainer = document.querySelector('#article-container');
+
 var modal = document.getElementById("myModal");
 var span = document.getElementsByClassName("close")[0];
 
@@ -30,26 +32,25 @@ var options = [
     {country: "Canada", code: "ca", currency: "CAD", exchange: "TSX" },
     {country: "China", code: "cn", currency: "CNY", exchange: "SSE" },
     {country: "European Union", code: "eu", currency: "EUR", exchange: "ENX" },
-    {country: "Honk Kong", code: "hk", currency: "HKD", exchange: "HKEX" },
+    {country: "Hong Kong", code: "hk", currency: "HKD", exchange: "HKEX" },
     {country: "India", code: "in", currency: "INR", exchange: "NSE" },
     {country: "Japan", code: "jp", currency: "JPY", exchange: "TYO" },
-    {country: "Mexio", code: "mx", currency: "MXN", exchange: "BMV" },
+    {country: "Mexico", code: "mx", currency: "MXN", exchange: "BMV" },
     {country: "New Zealand", code: "nz", currency: "NZD", exchange: "NZX" },
     {country: "Phillipines", code: "ph", currency: "PHP", exchange: "PHS" },
     {country: "South Africa", code: "za", currency: "ZAR", exchange: "JSE" },
     {country: "Switzerland", code: "ch", currency: "CHF", exchange: "SWX" },
-    {country: "United Kingdon", code: "gb", currency: "GBP", exchange: "LSE" },
+    {country: "United Kingdom", code: "gb", currency: "GBP", exchange: "LSE" },
     {country: "United States", code: "us", currency: "USD", exchange: "NYSE" },
 ];
 
-//lists out the options available to choose from in the drop down lists
-var getList = function () {
-  
-  document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.parallax');
-    var instances = M.Parallax.init(elems, options);
-  });  
-  
+
+$(document).ready(function(){
+  $('.parallax').parallax();
+});
+
+var getList = function () { 
+  //load options into dropdown list
   for (var i = 0; i < options.length; i++) {
         var sourceCountryCode = document.createElement('option');
         sourceCountryCode.textContent = options[i].country + " - " + options[i].currency;
@@ -61,6 +62,9 @@ var getList = function () {
         destinationCountryCode.setAttribute('value', options[i].currency + '-' + options[i].exchange);
         destinationCountry.append(destinationCountryCode);
     };
+  //load date to page
+  var now = dayjs().format('dddd D MMM, YYYY');
+  dateContainer.textContent = now;
 };
 
 var loadHistory = function () {
@@ -76,8 +80,7 @@ var loadHistory = function () {
 
 
 function handleButtonClick(event){
-    //get currency of selected countries
-    loadHistory();
+  // event.preventDefault();  
 
     sourceCountryCode = sourceCountry.value.split('-')[0];
     destinationCountryCode = destinationCountry.value.split('-')[0];
@@ -90,6 +93,7 @@ function handleButtonClick(event){
       span.onclick = function() {
         modal.style.display = "none";
       }
+      return;
     } else {
 
     //API to fetch results for exchange rates
@@ -123,13 +127,12 @@ function handleButtonClick(event){
       historyArray.shift();
         }
       localStorage.setItem("historyArray", JSON.stringify(historyArray));
-      
       })
+    .then(function(){loadHistory()}) 
+
     };
-
-
-
-      var marketNewsURL = 'https://api.marketaux.com/v1/news/all?exchanges=' + targetExchange + '&filter_entities=true&limit=3&published_after=2022-12-29T02:24&api_token=' + marketKey;
+    
+    var marketNewsURL = 'https://api.marketaux.com/v1/news/all?exchanges=' + targetExchange + '&filter_entities=true&language=en&limit=3&published_after=2022-12-29T02:24&api_token=' + marketKey;
 
 
     //API to fetch results for exchange rates
@@ -139,6 +142,7 @@ function handleButtonClick(event){
         newsResponse.json().then(function(data) {
 
           console.log(marketNewsURL);
+          console.log(data);
           articleContainer.innerHTML= '';
 
           var articleList = document.createElement('ul');
@@ -153,7 +157,7 @@ function handleButtonClick(event){
             articleSnippet.textContent = data.data[i].snippet;
             articleTitle.appendChild(articleSnippet);
 
-            var articleURL = document.createElement('p');
+            var articleURL = document.createElement('a');
             articleURL.textContent = "Read more";
             articleURL.setAttribute("href", data.data[i].url);
             articleTitle.appendChild(articleURL);
@@ -161,6 +165,8 @@ function handleButtonClick(event){
         })
       }
      })
+     //get currency of selected countries
+
     };
 
 submitBtn.addEventListener('click', handleButtonClick);
