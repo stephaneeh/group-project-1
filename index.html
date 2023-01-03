@@ -14,71 +14,64 @@
     
 </head>
 
-<header>
-  <h1 class = "card-panel light-blue darken-2 white-text z-depth-3 center-align">Currency Exchanger</h1>
-  <h2 id="date"></h2> <!-- TODO: I haven't touched the jQuery date -->
-</header>
+  <header class = "light-blue darken-2 white-text center-align">
+    <h1>Currency Exchanger</h1>
+    <h5 id="date-container"></h5> <!-- TODO: I haven't touched the jQuery date -->
+  </header>
 
-<div class="hero"></div>
 
 <body>
-  <!--Currency excange 'card'-->
-    <!--Materialize sets a 'container' to use 70% of the available space-->
-    <!-- TODO: PLAY WITH THIS SOME MORE TO WORK OUT WHAT ITS DOING<div class="parallax-container">
-      <div class="parallax"><img src="./assets/img/download.jpeg"></div>
-    </div> -->
-    
-    <div class="container">
 
-    <main>
-    <div class = "center z-depth-5">
-       <section class = "container row">
-
-        <!--Currency Dropdown Menus--><!--TODO: add some space in between menus-->
-        <div id="dropdown-currencies" class="row col s12">
-
-          <br><br><br>
-            <select id="source-country" class = "browser-default col s6"> </select>
-            <i class="medium material-icons arrow">arrow_forward</i>
-            <select id="destination-country" class = "browser-default col s6"> </select>
-            
-          </div>    
-           
-      </section>   
-      
-      <!--Amount Input Field--><!--TODO:I couldn't center a smaller input field-->
-      <div id="exchange-container" class ="container">
-        <form class="col s12">
-          <div class="row">
-            <div class="input-field col s6 offset-s3">
-              <i class="material-icons prefix">attach_money</i>
-              <textarea id="input-field" class="materialize-textarea"></textarea>
-              <label for="icon_prefix2">Enter an amount</label>
-            </div>
-          </div>
-        </form>
+  <main>
+    <!-- Modal content -->
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Please enter a valid number to convert and try again.</p>
       </div>
-    
-      <section class="container"> <!--Added this section to keep the convert button and rate exchange together-->
-       
-            <div id="results-container"></div> 
-            
-            <a id = "submit-btn" class="blue waves-effect waves-light btn-large btn hoverable"><i class="material-icons right">autorenew</i>Convert</a>
-      </section>
-
-      <div id="myModal" class="modal">
-        <!-- Modal content -->
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <p>Please enter a valid number to convert and try again.</p>
+    </div>
+    <!-- Parallax 1 -->
+    <div class="parallax-container">
+      <div class="parallax"><img src="assets/img/parallax1.jpg"></div>
+    </div>
+    <!-- User Input container -->
+    <section class="section white">
+      <div class="row container">
+        <div class="user-input-container">
+          <section class = "container row">
+            <!--Currency Dropdown Menus--><!--TODO: add some space in between menus-->
+            <div id="dropdown-currencies" class="row col s12">
+              <select id="source-country" class = "browser-default col s6"> </select>
+              <i class="medium material-icons arrow">arrow_forward</i>
+              <select id="destination-country" class = "browser-default col s6"> </select>
+            </div>    
+          </section>   
+              
+          <!--Amount Input Field-->
+          <section id="exchange-container" class ="container row">
+            <form class="col s12">
+              <!-- <div class="row"> -->
+                <div class="input-field col s6 offset-s3">
+                  <i class="material-icons prefix">attach_money</i>
+                  <textarea id="input-field" class="materialize-textarea"></textarea>
+                  <label for="icon_prefix2">Enter an amount</label>
+                </div>
+              <!-- </div> -->
+            </form>
+          </section>
         </div>
-      
-      </div>
+        
+        <section class="convert-container center"> <!--Added this section to keep the convert button and rate exchange together-->
+          <div id="results-container" class="align center"></div> 
+            <a id = "submit-btn" class="blue waves-effect waves-light btn-large btn hoverable align center"><i class="material-icons right">autorenew</i>Convert</a>
+        </section>
+    </section>
 
-      <br><br>
+    <!-- Parallax 1 -->
+    <div class="parallax-container">
+      <div class="parallax"><img src="assets/img/parallax1.jpg"></div>
     </div>
 
-    <br><br><br>
       
     <div class = "row">
       <!--added funny background colours to make it easier to track-->
@@ -104,7 +97,12 @@
     <footer></footer>
     
      <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+    integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+    crossorigin="anonymous"></script>
     <script src="./assets/js/script.js"></script>
 </body>
+
 </html>
