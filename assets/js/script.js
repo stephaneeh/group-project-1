@@ -20,7 +20,8 @@ var historyContainer = document.querySelector('#history-container');
 var historyList = document.querySelector('#history-list');
 var newsContainer = document.querySelector('#news-container');
 var articleContainer = document.querySelector('#article-container');
-
+var rotatingImage1 = document.querySelector('#rotating-image1');
+var rotatingImage2 = document.querySelector('#rotating-image2');
 var modal = document.getElementById("myModal");
 var span = document.getElementsByClassName("close")[0];
 
@@ -52,6 +53,30 @@ $(document).ready(function(){
 $(document).ready(function(){
   $('select').formSelect();
 });
+
+
+function showImage() {
+  // Better array init thanks to Joseph Silvashy
+  var theImages = [
+    "./assets/img/background/1.png",
+    "./assets/img/background/2.png",
+    "./assets/img/background/3.png",
+    "./assets/img/background/4.png",
+    "./assets/img/background/5.png",
+    "./assets/img/background/6.png",
+  ]
+
+  var whichImage = Math.round(Math.random() * 5);
+  console.log(whichImage);
+
+  rotatingImage1.setAttribute('src', theImages[whichImage]);
+  rotatingImage2.setAttribute('src', theImages[whichImage]);
+
+  // document.getElementById("rotating-image").src = theImages[whichImage];
+}
+
+
+
 
 var getList = function () { 
   //load options into dropdown list
@@ -180,3 +205,4 @@ submitBtn.addEventListener('click', handleButtonClick);
 //Loads the available options in the drop down lists
 getList();
 loadHistory();
+showImage();

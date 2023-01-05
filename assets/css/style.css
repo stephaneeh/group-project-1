@@ -17,6 +17,11 @@ a {
     font-style: normal;
 }
 
+#logo {
+    margin: 0px;
+
+}
+
 .modal {
     display: none;
     position: fixed;
