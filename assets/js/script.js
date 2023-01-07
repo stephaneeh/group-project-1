@@ -1,11 +1,12 @@
-//exchange rates keys
+//--- exchange rates keys ---//
 var mauxiKey = '1cd51d26035378cfa296c442';
-var YanfangKey = '913440a5293f2012406cc25c';
+var yanfangKey = '913440a5293f2012406cc25c';
 var shKey = '9467838ba1d2eed66723ca50';
 
-// marketAUX details
+//--- marketAUX details ---//
 var marketKey = 'PBOJWpVm2AVpXBog3MjMLnkCiqqiw3XMXKxXcv3h';
 
+//--- declared variables ---//
 var sourceCountryCode = '';
 var destinationCountryCode = '';
 var targetExchange = '';
@@ -50,14 +51,14 @@ $(document).ready(function(){
   $('.parallax').parallax();
 });
 
-$(document).ready(function(){
-  $('select').formSelect();
-});
+// $(document).ready(function(){
+//   $('select').formSelect();
+// });
 
 
+//--- random selection of background image ---//
 function showImage() {
-  // Better array init thanks to Joseph Silvashy
-  var theImages = [
+    var theImages = [
     "./assets/img/background/1.png",
     "./assets/img/background/2.png",
     "./assets/img/background/3.png",
@@ -72,15 +73,13 @@ function showImage() {
   rotatingImage1.setAttribute('src', theImages[whichImage]);
   rotatingImage2.setAttribute('src', theImages[whichImage]);
 
-  // document.getElementById("rotating-image").src = theImages[whichImage];
 }
 
 
 
-
+//--- loads country options into the dropdown menus ---//
 var getList = function () { 
-  //load options into dropdown list
-  for (var i = 0; i < options.length; i++) {
+    for (var i = 0; i < options.length; i++) {
         var sourceCountryCode = document.createElement('option');
         sourceCountryCode.textContent = options[i].country + " - " + options[i].currency;
         sourceCountryCode.setAttribute('value', options[i].currency + '-' + options[i].code);
@@ -91,11 +90,13 @@ var getList = function () {
         destinationCountryCode.setAttribute('value', options[i].currency + '-' + options[i].exchange);
         destinationCountry.append(destinationCountryCode);
     };
-  //load date to page
+  //--- loads current date and time to page ---//
   var now = dayjs().format('dddd D MMM, YYYY');
   dateContainer.textContent = now;
 };
 
+
+//--- creates a list with the recent searches ---//
 var loadHistory = function () {
   historyList.innerHTML= '';  
   
@@ -108,25 +109,27 @@ var loadHistory = function () {
   };
 
 
+//--- CONVERT button events ---//
 function handleButtonClick(event){
-  // event.preventDefault();  
-
+  
     sourceCountryCode = sourceCountry.value.split('-')[0];
     destinationCountryCode = destinationCountry.value.split('-')[0];
     targetExchange = destinationCountry.value.split('-')[1];
 
-    //modal to appear if input field is empy
+    // --- modal will appear if input field is empy ---//
     if (!inputField.value) {
       modal.style.display = "block";
-      //on select the close button
+      
       span.onclick = function() {
         modal.style.display = "none";
       }
       return;
     } else {
 
-    //API to fetch results for exchange rates
-    fetch('https://v6.exchangerate-api.com/v6/'+ shKey +'/pair/' + sourceCountryCode +'/'+ destinationCountryCode +'')
+    //--- API to fetch results for exchange rates ---//
+    var exchangeURL = 'https://v6.exchangerate-api.com/v6/'+ mauxiKey +'/pair/' + sourceCountryCode +'/'+ destinationCountryCode +'';
+    
+    fetch(exchangeURL)
       .then(function (response) {
         return response.json();
       })
@@ -139,11 +142,11 @@ function handleButtonClick(event){
         inputValueResult.textContent = inputValue + ' ' + sourceCountryCode +' = ' + inputResult + " " + destinationCountryCode;
         resultsContainer.append(inputValueResult);
        
-        var DollarResult = document.createElement('p');
-        DollarResult.textContent = '1 '+ sourceCountryCode +' = ' + data.conversion_rate + " " + destinationCountryCode;
-        resultsContainer.append(DollarResult);
+        var dollarResult = document.createElement('p');
+        dollarResult.textContent = '1 '+ sourceCountryCode +' = ' + data.conversion_rate + " " + destinationCountryCode;
+        resultsContainer.append(dollarResult);
 
-        // localStorage.setItem(sourceCountryCode +' to '+ destinationCountryCode, data.conversion_rate);
+        //--- saves the latest 5 results to the local storage ---//
         var history = {
           conversion: sourceCountryCode +' to '+ destinationCountryCode,
           rate: data.conversion_rate,
@@ -160,11 +163,11 @@ function handleButtonClick(event){
     .then(function(){loadHistory()}) 
 
     };
+
     
     var marketNewsURL = 'https://api.marketaux.com/v1/news/all?exchanges=' + targetExchange + '&filter_entities=true&language=en&limit=3&published_after=2022-12-29T02:24&api_token=' + marketKey;
 
-
-    //API to fetch results for exchange rates
+    //--- API to fetch results for financial news ---//
     fetch(marketNewsURL)
     .then(function (newsResponse) {
       if (newsResponse.ok) {
@@ -174,9 +177,7 @@ function handleButtonClick(event){
           console.log(data);
           articleContainer.innerHTML= '';
 
-          // var articleList = document.createElement('ul');
-          // articleContainer.appendChild(articleList);
-
+          // --- populates the news container with 'title', 'snippet' and [url] that takes you to the article ---//
           for (var i = 0; i < data.data.length; i++) {
             var articleTitle = document.createElement('h5');
             articleTitle.setAttribute('id', 'news-style');
@@ -202,7 +203,7 @@ function handleButtonClick(event){
 
 submitBtn.addEventListener('click', handleButtonClick);
 
-//Loads the available options in the drop down lists
+//--- onLoad functions ---//
 getList();
 loadHistory();
 showImage();
