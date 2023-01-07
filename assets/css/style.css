@@ -2,6 +2,12 @@ body {
     font-family: sans-serif, arial, helvetica;
 }
 
+header, 
+section,
+footer {
+    padding: 10px 0;
+}
+
 h1,
 h2 {
     margin-top: 10px;
@@ -21,9 +27,12 @@ a {
     font-style: normal;
 }
 
+li {
+    margin-left: 10px;
+}
+
 #logo {
     margin: 0px;
-
 }
 
 .modal {
@@ -60,16 +69,8 @@ a {
     text-decoration: none;
     cursor: pointer;
 }
-header, 
-section,
-footer {
-    padding: 10px 0;
-}
 
-li {
-    margin-left: 10px;
-}
-
+/* modifications to CSS framework */
 .row {
     margin-bottom: 0px;
 }
@@ -112,7 +113,7 @@ input:not([type]):focus:not([readonly])+label, input[type=text]:not(.browser-def
     color: #0288d1;
 }
        
-
+/* Media Query code for responsive layout */
  @media screen and (max-width: 768px) {
     #history-container,
     #news-container {

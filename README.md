@@ -1,11 +1,7 @@
 # group-project-1
 
 ## Description
-The Travelpedia was created for international traveler who wants to see the exchange rate from current country to destination country in order to decide whether to exchange money on this day. It also allows users to view the local financial news stories about the destination, and for them to be aware of any possible impacts on exchange/travel.
-
-## Installation
-
-N/A
+The Travelpedia App was created for international travelers who want to see the current exchange rate between their country and the country they intend to travel to, in order to decide whether to exchange money on this day. It also allows users to view the local financial news stories about the destination, so they can be aware of any possible impacts on exchange/travel.
 
 ## Usage
 
@@ -29,10 +25,13 @@ https://materializecss.com/
 
 ## Credits
 
-N/A
+https://github.com/MoMoncada
+
+https://github.com/zhou7cathy
 
 ## License
 
-N/A
+MIT
 
 ## Link to deployed application
+

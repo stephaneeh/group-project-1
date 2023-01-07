@@ -51,11 +51,6 @@ $(document).ready(function(){
   $('.parallax').parallax();
 });
 
-// $(document).ready(function(){
-//   $('select').formSelect();
-// });
-
-
 //--- random selection of background image ---//
 function showImage() {
     var theImages = [
@@ -72,12 +67,10 @@ function showImage() {
 
   rotatingImage1.setAttribute('src', theImages[whichImage]);
   rotatingImage2.setAttribute('src', theImages[whichImage]);
-
 }
 
 
-
-//--- loads country options into the dropdown menus ---//
+// --- loads country options into the dropdown menus ---//
 var getList = function () { 
     for (var i = 0; i < options.length; i++) {
         var sourceCountryCode = document.createElement('option');
