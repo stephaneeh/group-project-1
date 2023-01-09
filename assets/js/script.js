@@ -95,7 +95,8 @@ var loadHistory = function () {
   
   for (var i = 0; i < historyArray.length; i++) {
         var liEl = document.createElement('li');
-        liEl.textContent = historyArray[i].conversion + " - " + historyArray[i].rate;
+        // liEl.textContent = historyArray[i].conversion + " - " + historyArray[i].rate;
+        liEl.textContent = historyArray[i].value;
 
         historyList.appendChild(liEl);
     }
@@ -141,8 +142,9 @@ function handleButtonClick(event){
 
         //--- saves the latest 5 results to the local storage ---//
         var history = {
-          conversion: sourceCountryCode +' to '+ destinationCountryCode,
-          rate: data.conversion_rate,
+          value: '1 '+ sourceCountryCode +' = ' + data.conversion_rate + " " + destinationCountryCode,
+          // conversion: sourceCountryCode +' to '+ destinationCountryCode,
+          // rate: data.conversion_rate,
         };
           
         if (historyArray.length < 5) {
