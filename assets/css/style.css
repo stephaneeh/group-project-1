@@ -93,6 +93,11 @@ li {
     align-items: center;
 }
 
+.italic {
+    font-style: italic;
+}
+
+
 select {
     height: 60px;
     background-color: RGBA(135, 206, 250, 0.2);
